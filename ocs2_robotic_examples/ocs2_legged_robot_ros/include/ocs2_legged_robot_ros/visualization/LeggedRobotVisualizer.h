@@ -74,7 +74,7 @@ class LeggedRobotVisualizer : public DummyObserver {
 
   void publishTrajectory(const std::vector<SystemObservation>& system_observation_array, scalar_t speed = 1.0);
 
-  void publishObservation(ros::Time timeStamp, const SystemObservation& observation);
+  void publishObservation(ros::Time timeStamp, const SystemObservation& observation, bool publishOdomTF = true);
 
   void publishDesiredTrajectory(ros::Time timeStamp, const TargetTrajectories& targetTrajectories);
 

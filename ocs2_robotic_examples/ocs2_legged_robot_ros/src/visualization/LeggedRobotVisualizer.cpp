@@ -117,7 +117,7 @@ void LeggedRobotVisualizer::update(const SystemObservation& observation, const P
 /******************************************************************************************************/
 /******************************************************************************************************/
 /******************************************************************************************************/
-void LeggedRobotVisualizer::publishObservation(ros::Time timeStamp, const SystemObservation& observation) {
+void LeggedRobotVisualizer::publishObservation(ros::Time timeStamp, const SystemObservation& observation, bool publishOdomTF) {
   // Extract components from state
   const auto basePose = centroidal_model::getBasePose(observation.state, centroidalModelInfo_);
   const auto qJoints = centroidal_model::getJointAngles(observation.state, centroidalModelInfo_);
@@ -131,7 +131,9 @@ void LeggedRobotVisualizer::publishObservation(ros::Time timeStamp, const System
 
   // Publish
   publishJointTransforms(timeStamp, qJoints);
-  publishBaseTransform(timeStamp, basePose);
+  if (publishOdomTF) {
+    publishBaseTransform(timeStamp, basePose);
+  }
   publishCartesianMarkers(timeStamp, modeNumber2StanceLeg(observation.mode), feetPositions, feetForces);
 }
 
