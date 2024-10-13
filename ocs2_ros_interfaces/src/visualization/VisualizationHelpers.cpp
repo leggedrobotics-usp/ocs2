@@ -150,7 +150,8 @@ visualization_msgs::Marker getFootMarker(const Eigen::Vector3d& position, bool c
 
 visualization_msgs::Marker getForceMarker(const Eigen::Vector3d& force, const Eigen::Vector3d& position, bool contactFlag, Color color,
                                           double forceScale) {
-  auto forceMarker = getArrowToPointMsg(force / forceScale, position, color);
+  // auto forceMarker = getArrowToPointMsg(force / forceScale, position, color);
+  auto forceMarker = getArrowAtPointMsg(force / forceScale, position, color);
   forceMarker.ns = "EE Forces";
   if (!contactFlag) {
     setInvisible(forceMarker);
